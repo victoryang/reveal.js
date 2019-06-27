@@ -25,37 +25,36 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>
-					<h2 style="color: #1b91ff">监控系统重构方案进展</h2>
+				<section data-markdown data-background-image="background_xueqiu.jpeg">
+					## 监控系统重构方案进展
+
+					<img data-src="pasted-image.png">
 				</section>
 				<section data-markdown style="color: #1b91ff">
-					1. 需求
-					2. 系统实现
-					3. 未来
+					* 需求
+					* 现状
+					* 未来
 				</section>
 				<section>
 					<section>
 						<div style="color: #1b91ff">需求</div>
 						<br>
 						<br>
-						<div class="fragment fade-in">
+						<div class="fragment fade-up">
 							1. 系统的可靠性
 						</div>
 						<br>
-						<div class="fragment fade-in">
+						<div class="fragment fade-up">
 							2. 系统的易维护性
 						</div>
 					</section>		
 				</section>
 				<section>
-					<section>
-						<div style="color: #1b91ff">系统实现</div>
-					</section>
 					<section data-markdow>
-						<p2 style="color: #1b91ff">全部基于开源组件配置部署</p2>
+						<div style="color: #1b91ff">系统现状</div>
 						<br>
 						<br>
-						<table class="reveal">
+						<table class="reveal fragment fade-up">
 					    	<tr>
 							<th>系统</th>
 							<th>组成</th>
@@ -83,20 +82,26 @@
 					</section>
 
 					<section>
+						<ul>
+							<li>zabbix使用时间最早，监控了物理机等很多资源，与graphite等有数据重复的问题</li>
+							<li class="fragment fade-up">graphite在整个监控系统占最主要地位
+								<ul>
+									<li class="fragment fade-up">集群部署基于graphite官方推荐，使用第三方go开发的高性能组件代替部分官方组件</li>
+									<li class="fragment fade-up">现有部署的架构，采用分片策略，数据采集后，基于一致性哈希算法，分片分发到不同集群carbon中，由graphite-web进行聚合</li>
+								</ul>
+							</li>
+							<li class="fragment fade-up">falcon本意代替graphite，最后只迁移了mysql部分</li>
+						</ul>
+					</section>
+
+					<section>
+						<img src="graphite-upstream.png" style="width:700px;height:600px;">
+					</section>
+
+					<section>
 						<img src="graphite.png" style="width:700px;height:600px;">
 					</section>
 
-					<section data-markdown>
-						- zabbix使用时间最早，监控了物理机等很多资源，与graphite等有数据重复的问题
-						- graphite在整个监控系统占最主要地位，现有部署情况
-						    - 集群部署基于graphite官方推荐，使用第三方go开发的高性能组件代替部分官方组件
-						    - 现有部署的架构，采用分片策略，数据采集后，基于一致性哈希算法，分片分发到不同集群carbon中，由graphite-web进行聚合
-						- falcon本意代替graphite，最后只迁移了mysql部分
-					</section>
-
-					<section data-markdown>
-						- 在开源社区内，prometheus的关注度很高，在容器云/kubernetes领域也是不二的选择。官网上也给出了与其他监控系统的对比，给出了适应的场景，需要结合现有实际，以及未来的规划，找出合适的方案
-					</section>
 				</section>
 
 				<section>
@@ -112,21 +117,46 @@
 						<div style="color: #1b91ff">Scope</div>
 						<br>
 						<br>
-						<div>Prometheus is a full monitoring and trending system that includes built-in and active scraping, storing, querying, graphing, and alerting based on time series data</div>
+						<div style="font-size: 30px">Prometheus is a full monitoring and trending system that includes built-in and active scraping, storing, querying, graphing, and alerting based on time series data</div>
 					</section>
 
-					<section data-markdown>
+					<section>
 						<div style="color: #1b91ff">Data model</div>
+						<br>
+						<br>
 
-	stats.api-server.tracks.post.500 -> 93
-	
-	api_server{method="POST",handler="/tracks",status="500",instance="<sample1>"} -> 34
-	api_server{method="POST",handler="/tracks",status="500",instance="<sample2>"} -> 28
-	api_server{method="POST",handler="/tracks",status="500",instance="<sample3>"} -> 31
+						<code class="hljs" style="font-size: 20px">
+							stats.api-server.tracks.post.500 -> 93
+						</code>
+
+						<br>
+
+						<code class="hljs" style="font-size: 20px">
+							api_server{method="POST",handler="/tracks",status="500",instance="<sample1>"} -> 34
+							api_server{method="POST",handler="/tracks",status="500",instance="<sample2>"} -> 28
+							api_server{method="POST",handler="/tracks",status="500",instance="<sample3>"} -> 31
+						</code>
+
 					</section>
 
 					<section>
 						<div style="color: #1b91ff">Storage</div>
+						<br>
+
+						<ul>
+							<li>Local Storage
+								<ul>
+									<li>local disk</li>
+								</ul>
+							</li>
+							<li>Remote Storage
+								<ul>
+									<li>remote read</li>
+									<li>remote write</li>
+								</ul>
+							</li>
+						</ul>
+
 					</section>
 
 					<section>
@@ -135,6 +165,11 @@
 
 					<section>
 						<img src="federation.jpg" style="width:800px;height:600px;">
+					</section>
+
+					<section data-markdown>
+						- 在开源社区内，prometheus的关注度很高，在容器云/kubernetes领域也是不二的选择
+						- 官网上有prometheus与其他监控系统的对比，给出其适应的场景，需要结合现有实际，以及未来的规划，找出合适的监控方案
 					</section>
 				</section>
 
