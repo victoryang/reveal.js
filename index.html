@@ -64,7 +64,7 @@
 							<tr>
 							<td>zabbix</td>
 							<td>zabbix</td>
-							<td>物理机资源</td>
+							<td>物理机资源<br>部分业务监控</td>
 							</tr>
 
 							<tr>
@@ -87,10 +87,10 @@
 							<li class="fragment fade-up">graphite在整个监控系统占最主要地位
 								<ul>
 									<li class="fragment fade-up">集群部署基于graphite官方推荐，使用第三方go开发的高性能组件代替部分官方组件</li>
-									<li class="fragment fade-up">现有部署的架构，采用分片策略，数据采集后，基于一致性哈希算法，分片分发到不同集群carbon中，由graphite-web进行聚合</li>
+									<li class="fragment fade-up">现有部署的架构，采用分片策略，数据采集后，基于一致性哈希算法，分片分发到集群中不同的carbon中，由graphite-web进行聚合</li>
 								</ul>
 							</li>
-							<li class="fragment fade-up">falcon本意代替graphite，最后只迁移了mysql部分</li>
+							<li class="fragment fade-up">falcon本意代替graphite，最终只迁移了mysql部分</li>
 						</ul>
 					</section>
 
@@ -146,7 +146,8 @@
 						<ul>
 							<li>Local Storage
 								<ul>
-									<li>local disk</li>
+									<li>wal</li>
+									<li>tsdb(future)</li>
 								</ul>
 							</li>
 							<li>Remote Storage
@@ -167,6 +168,10 @@
 						<img src="federation.jpg" style="width:800px;height:600px;">
 					</section>
 
+					<section>
+						<div style="color: #1b91ff">https://prometheus.io/docs/prometheus/latest/getting_started/</div>
+					</section>
+
 					<section data-markdown>
 						- 在开源社区内，prometheus的关注度很高，在容器云/kubernetes领域也是不二的选择
 						- 官网上有prometheus与其他监控系统的对比，给出其适应的场景，需要结合现有实际，以及未来的规划，找出合适的监控方案
@@ -174,7 +179,7 @@
 				</section>
 
 				<section>
-					<div style="color: #1b91ff">End</div>
+					<div style="color: #1b91ff">To be continued ...</div>
 				</section>
 			</div>
 		</div>
