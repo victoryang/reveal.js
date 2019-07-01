@@ -102,6 +102,15 @@
 						<img src="graphite.png" style="width:700px;height:600px;">
 					</section>
 
+					<section>
+						<ul>
+							<li>需要管理多个系统，整体混乱</li>
+							<li>与ldap、cmdb等管理平台的关联度差</li>
+							<li>系统可靠性不高</li>
+							<li>社区活跃度及行业关注度</li>
+						</ul>
+					</section>
+
 				</section>
 
 				<section>
@@ -167,18 +176,35 @@ api_server{method="POST",handler="/tracks",status="500",instance="sample3"} -> 3
 						<img src="federation.jpg" style="width:800px;height:600px;">
 					</section>
 
-					<section>
-						<div style="color: #1b91ff">https://prometheus.io/docs/introduction/overview/</div>
+					<section data-markdown>
+						- 在开源社区内，prometheus的活跃度和关注度很高，在容器云/kubernetes领域是主流选择
+						- 官方提供较可靠的HA方案
+						- 业界有较多尝试和分享
 					</section>
 
 					<section data-markdown>
-						- 在开源社区内，prometheus的关注度很高，在容器云/kubernetes领域也是不二的选择
-						- 官网上有prometheus与其他监控系统的对比，给出其适应的场景，需要结合现有实际，以及未来的规划，找出合适的监控方案
+						- 报警模块无可视化界面，添加报警规则需要手动修改配置
+						- data model采用独特的结构
 					</section>
+
+					<section data-markdown>
+						- 在现有系统上解决与其他管理系统联动问题
+						- Prometheus接管falcon监控内容
+							- 研究HA方案，搭建可靠的监控系统
+							- 提供UI，实现报警可视化配置
+							- 研究扩展方案
+						- 移出zabbix业务相关监控项至prometheus
+						- 承接graphite相关监控内容
+						- 探寻其他方案的可能性	
+					</section>
+
 				</section>
 
 				<section>
-					<div style="color: #1b91ff">To be continued ...</div>
+					<section>
+						<div style="color: #1b91ff">To be continued ...</div>
+					</section>
+
 				</section>
 			</div>
 		</div>
