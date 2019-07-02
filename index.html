@@ -41,11 +41,11 @@
 						<br>
 						<br>
 						<div class="fragment fade-up">
-							1. 系统的可靠性
+							1. 系统可用性
 						</div>
 						<br>
 						<div class="fragment fade-up">
-							2. 系统的易维护性
+							2. 系统易维护度
 						</div>
 					</section>		
 				</section>
@@ -103,11 +103,15 @@
 					</section>
 
 					<section>
+						<div style="color: #1b91ff">问题</div>
+						<br>
+						<br>
+
 						<ul>
-							<li>需要管理多个系统，整体混乱</li>
-							<li>与ldap、cmdb等管理平台的关联度差</li>
-							<li>系统可靠性不高</li>
-							<li>社区活跃度及行业关注度</li>
+							<li class="fragment fade-up">需要管理多个系统，整体混乱</li>
+							<li class="fragment fade-up">与ldap、cmdb等管理平台的联动性不高</li>
+							<li class="fragment fade-up">部署系统的HA方案有缺陷</li>
+							<li class="fragment fade-up">社区活跃度及行业关注度</li>
 						</ul>
 					</section>
 
@@ -188,13 +192,17 @@ api_server{method="POST",handler="/tracks",status="500",instance="sample3"} -> 3
 					</section>
 
 					<section data-markdown>
+						<div style="color: #1b91ff">方案</div>
+						<br>
+
 						- 在现有系统上解决与其他管理系统联动问题
 						- Prometheus接管falcon监控内容
 							- 研究HA方案，搭建可靠的监控系统
 							- 提供UI，实现报警可视化配置
-							- 研究扩展方案
+							- data model迁移
+							- 扩展方案
 						- 移出zabbix业务相关监控项至prometheus
-						- 承接graphite相关监控内容
+						- 逐步承接graphite相关监控内容
 						- 探寻其他方案的可能性	
 					</section>
 
